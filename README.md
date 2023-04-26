@@ -50,25 +50,9 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 - The SPI protocol is a full-duplex communication protocol, which means that data can be transmitted and received simultaneously. It is also a relatively fast protocol, with speeds of up to several MHz.
 
 - The SPI protocol is commonly used in embedded systems, where it provides a simple and efficient way to communicate between different devices.
-
-    ![image](https://user-images.githubusercontent.com/84337196/233352679-aa4e0895-76df-4448-883f-0a3551b566aa.png)
-   
-   ### Internal Circuitry of the SPI Protocol
-   
-    ![image](https://user-images.githubusercontent.com/84337196/233365888-4ec317f8-b101-41a3-b4ef-d1d15e4d7fdf.png)
     
 ## Block Diagram    
 ![image](https://user-images.githubusercontent.com/84337196/233548771-c6374dd4-a8f3-4eb8-9ce6-2f0b5a5ecdaf.png)
-
-## Ports of LM70 emperature Sensor
-![image](https://user-images.githubusercontent.com/84337196/233549696-e92f3c9a-c64a-4de1-acaa-72a2fd136fe3.png)
-
-- ***Pin 1***: SI/O- Takes the temperature data from the surrounding and provides the serial output data.
-- ***Pin 2***: SC-   Clock signal of the slave. (Frequency of the slave clock is half the frequency of the master in the below project).
-- ***Pin 3, 6, 8***: NC- No Connection 
-- ***Pin 4***: GND- Ground Connection
-- ***Pin 5***: V+ - Supply Voltage
-- ***Pin 7***: CS- Chip Select connection 
     
 ## Circuitry of the FPGA used for the project
 
