@@ -2,8 +2,7 @@
 
 ## ABSTRACT
 - This abstract describes the implementation of an LM70 temperature sensor using Serial Peripheral Interface (SPI) protocol. The LM70 is a digital temperature sensor that uses an SPI bus for communication with other devices. The sensor can measure temperatures ranging from -55°C to 150°C with a resolution of ±0.25°C.
-This circuit is designed to provide the necessary power and signal conditioning using SPI interface to communicate with the sensor, where data transfer is bidirectional and is displayed in the 7-segment display. This circuit was then implemented in veriolog and synthesized it using Xylinx software.
-
+This circuit is designed to provide the necessary power and signal conditioning using SPI interface to communicate with the sensor, where data transfer is bidirectional and is displayed in the 7-segment display. This circuit was then implemented in verilog and is synthesized using Xylinx software.
 
 ## LM70
 
@@ -23,6 +22,8 @@ The LM70 temperature sensor offers several features that make it an attractive o
 3. **Digital Interface**: The LM70 communicates with the host microcontroller using a two-wire interface, which simplifies the integration process.
 4. **Small Size**: The LM70 is available in a small package that makes it ideal for space-constrained applications.
 5. **Wide Temperature Range**: The LM70 can measure temperatures in the range of -55°C to +150°C, which makes it suitable for a wide range of applications.
+
+The LM70 component is widely used across the automotive, industrial, and medical industries for various applications.
 
 ***Working Principle***:
 
