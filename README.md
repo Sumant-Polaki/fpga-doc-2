@@ -53,6 +53,13 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
     
 ## Block Diagram    
 ![image](https://user-images.githubusercontent.com/84337196/233548771-c6374dd4-a8f3-4eb8-9ce6-2f0b5a5ecdaf.png)
+
+
+## Timing Diagram
+![image](https://user-images.githubusercontent.com/84337196/234562302-3ad1e84f-5d1d-4c05-9beb-ff4f5bf9db7c.png)
+
+
+
     
 ## Circuitry of the FPGA used for the project
 
