@@ -25,22 +25,6 @@ The LM70 temperature sensor offers several features that make it an attractive o
 
 The LM70 component is widely used across the automotive, industrial, and medical industries for various applications.
 
-***Working Principle***:
-
-The LM70 temperature sensor works by measuring the voltage across a diode that is biased with a constant current. The voltage across the diode is proportional to the temperature, which allows the LM70 to accurately measure the temperature. The LM70 uses a two-wire interface to communicate the temperature data to the host microcontroller. The LM70 temperature sensor also has an on-chip filter that helps reduce noise in the temperature signal.
-
-***Application***:
-
-The LM70 temperature sensor is widely used in various applications, such as:
-
-1. **Automotive**: The LM70 can be used to measure the temperature of various automotive components, such as the engine, transmission, and exhaust systems.
-2. **Industrial**: The LM70 is ideal for measuring temperatures in industrial equipment, such as boilers, furnaces, and heat exchangers.
-3. **Medical**: The LM70 is commonly used in medical equipment, such as blood analyzers, patient monitors, and thermal imaging devices.
-
-***Conclusion***:
-
-The LM70 temperature sensor is a highly accurate and versatile temperature sensing solution that is ideal for a wide range of applications. Its low power consumption, digital interface, and small size make it an attractive option for designers who need to measure temperature in space-constrained environments. With its wide temperature range and high accuracy, the LM70 is a reliable and cost-effective choice for temperature sensing in various industries.
-
 
 [Reference Datasheet of LM70 by Texas Instruments](https://www.dropbox.com/s/ot6h1511lpuxlmx/datasheet-LM70-TI-tempSensor.pdf)
 
