@@ -71,8 +71,7 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 - SCK, the slave clock, has a frequency that is half that of the master clock as it toggles on each negative edge of the divided clock.
 - Chip Select is kept active low, so whenever the signal is low, the slave clock is turned ON and data is read.
 - dataSeg[7:0] is the 7-segment display output which is obtained from the shift register.
-- disp[1:0] are the select lines for the 7-segment displays. When disp[1] is ON, disp[0] is OFF: 2'b10 = 1'd2.
-disp[1] is OFF, disp[0] is ON: 2'b01 = 1'd1.  
+- disp[1:0] are the 2 select lines for the respective 7-segment displays. When disp[1] is ON, disp[0] is OFF: 2'b10 = 1'd2. disp[1] is OFF, disp[0] is ON: 2'b01 = 1'd1.  
 
 
 
