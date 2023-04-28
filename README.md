@@ -125,7 +125,7 @@ A SIPO Register is used here, which stores data serially on each positive clock 
 
 /////Verilog code for continous SPI read of LM07
 module LM07_read(SYSCLK, RSTN, divclk, CS, SCK, SIO, disp, dataSeg, outreg);
-input SYSCLK;	//System clock from the testbench
+  input SYSCLK;	//System clock from the testbench
   input RSTN;	//Active-low reset signal
   input SIO;	                        //Serial data output from the temp sensor.
   output reg divclk;            //Frequency Divider Clock
@@ -134,7 +134,7 @@ input SYSCLK;	//System clock from the testbench
   output [1:0] disp;	//7-segment display select lines.
   output [7:0] dataSeg;      //7-segment data
   output [7:0] outreg;	//the 8-bit data is latched for display
-    reg SYSCLK_HALF;
+  reg SYSCLK_HALF;
   reg [7:0] shift_reg;
   reg [1:0] spi_state;
   reg [4:0] count;
@@ -143,22 +143,21 @@ input SYSCLK;	//System clock from the testbench
   wire [3:0] bcd_msb;
   wire [3:0] bcd_lsb;
   reg [3:0] bcd_latch;    
-     reg [7:0] IN;
-   // Frequency Divider Clock
-    integer cnt;	
-	always @ (posedge SYSCLK) 
-	begin
-	if(!RSTN) begin
-	divclk = 0;
-	cnt =0;
-	end	
-   else
-   cnt = cnt+1;
-   if (cnt==1000) begin
-   divclk = ~divclk;
-   cnt = 0;
-   end
-end
+  reg [7:0] IN;
+  // Frequency Divider Clock
+  integer cnt;
+  always @ (posedge SYSCLK) begin
+     if(!RSTN) begin
+      divclk = 0;
+      cnt =0;
+      end	
+     else
+      cnt = cnt+1;
+      if (cnt==1000) begin
+        divclk = ~divclk;
+        cnt = 0;
+       end
+      end
   //Latch the shift register at the end of read.
   assign outreg[7:4] = bcd_msb; 
   assign outreg[3:0] = bcd_latch; 
@@ -172,16 +171,11 @@ end
   //  else if (spi_state == `DISP_WRITE_LSB)
    //   bcd_latch <= bcd_lsb;
   
-
-
-
-
-
 //7-segment decoder
   assign dataSeg[7] = (~bcd_latch[2] && ~bcd_latch[0]) || bcd_latch[1] || bcd_latch[0] || (bcd_latch[2] && bcd_latch[0]); //a
   assign dataSeg[6] = ~bcd_latch[2] || (~bcd_latch[1] && ~bcd_latch[0]) || (bcd_latch[1] && bcd_latch[0]);  //b
   assign dataSeg[5] = ~bcd_latch[1] || bcd_latch[0] || bcd_latch[2]; //c
-  assign dataSeg[4] = (~bcd_latch[2] && ~bcd_latch[0]) || (~bcd_latch[2] && bcd_latch[1]) || (bcd_latch[2] && ~bcd_latch[1] && bcd_latch[0]) || (bcd_latch[1] && ~bcd_latch[0]) || bcd_latch[3]; //d
+  assign dataSeg[4] = (~bcd_latch[2] && ~bcd_latch[0]) || (~bcd_latch[2] && bcd_latch[1]) || (bcd_latch[2] && ~bcd_latch[1] && bcd_latch[0]) || (bcd_latch[1] &&    ~bcd_latch[0]) || bcd_latch[3]; //d
   assign dataSeg[3] = (~bcd_latch[2] && ~bcd_latch[0]) || (bcd_latch[1] && ~bcd_latch[0]); //e
   assign dataSeg[2] = (~bcd_latch[1] && ~bcd_latch[0]) || (bcd_latch[2] && ~bcd_latch[1]) || (bcd_latch[2] && ~bcd_latch[0]) || bcd_latch[3]; //f
   assign dataSeg[1] = (~bcd_latch[2] && bcd_latch[1]) || (bcd_latch[2] && ~bcd_latch[1]) || bcd_latch[3] || (bcd_latch[1] && ~bcd_latch[0]); //g
@@ -206,18 +200,15 @@ end
 	shift_reg[0] <= SIO ;
       end
 
-
-
-
-  //SPI CLOCK SCK generator
-  always @(negedge divclk or negedge RSTN)
-    if (~RSTN || CS)
-      SCK <= 1'b0;
-    else
-      SCK <= ~SCK;
+//SPI CLOCK SCK generator
+always @(negedge divclk or negedge RSTN)
+  if (~RSTN || CS)
+    SCK <= 1'b0;
+  else
+    SCK <= ~SCK;
 //input generation
- always @ (posedge divclk)
- begin
+always @ (posedge divclk)
+begin
 if (~RSTN)
  IN = 0;
  else 
@@ -225,34 +216,34 @@ if (~RSTN)
  //IN = IN >> 1;
  end
   
-  // Chip Select CS generator
-  assign CS = ~(spi_state == `SPI_READ);
-  //7-Segment select lines
+// Chip Select CS generator
+assign CS = ~(spi_state == `SPI_READ);
+//7-Segment select lines
  assign disp[1] =  (spi_state == `DISP_WRITE_MSB);
-  assign disp[0] =  (spi_state == `DISP_WRITE_LSB);
+ assign disp[0] =  (spi_state == `DISP_WRITE_LSB);
 
-  // 2-spi_state (IDE, READ) spi_state-machine
-  always @(posedge divclk or negedge RSTN)
-    if (~RSTN)
+// 2-spi_state (IDE, READ) spi_state-machine
+always @(posedge divclk or negedge RSTN)
+  if (~RSTN)
       begin	    
         spi_state <= `SPI_IDLE;
         bcd_latch <= 4'b0000;
       end
-    else if ((count >= `CS_LOW_COUNT) && (count < `CS_HIGH_COUNT) )
+  else if ((count >= `CS_LOW_COUNT) && (count < `CS_HIGH_COUNT) )
       begin
         spi_state <= `SPI_READ;
       end
-    else if (count == `CS_HIGH_COUNT)
+  else if (count == `CS_HIGH_COUNT)
       begin	    
         spi_state <= `DISP_WRITE_MSB;
-		  bcd_latch <= bcd_msb;
+        bcd_latch <= bcd_msb;
       end
-    else if (count == `WRITE_LSB_COUNT)
+  else if (count == `WRITE_LSB_COUNT)
       begin	    
         spi_state <= `DISP_WRITE_LSB;
-		  bcd_latch <= bcd_lsb;
+        bcd_latch <= bcd_lsb;
       end
-    else 
+  else 
       begin	    
         spi_state <= `SPI_IDLE;
       end
