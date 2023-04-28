@@ -88,21 +88,18 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 - **Easier to cascade**: Synchronous counters are easier to cascade or connect in series to create larger counters. This is because the outputs of the flip-flops change state simultaneously in response to a single clock pulse, simplifying the interconnection of multiple counters.
 
 ### Shift Register Action
-The shift register used here is a SIPO(Serial Input Parallel Output) Register. At every positive clock edge of the clock, data is stored serially into the shift register. After the shift register acquires all the bits, it provides the parallel output to the MUX.
+A SIPO Register is used here, which stores data serially on each positive clock edge. The stored data is then outputted in parallel and used as input for the Binary to BCD converter.
 
-### Use of Multiplexer
-- Here, a 2:1 MUX is used where the select line is one of the outputs from the control logic and the inputs to the MUX is the MSB and the LSB bits of the shift register output since shift register gives an 8-bit output.
-- Here, the first 4 bits are LSB and the last 4 bits are MSB.
+### Binary to BCD Converter
+- Here, two 4-bit binary to BCD converters are used for MSB and LSB respectively where the 8-bit data is divided into two 4-bit datas.
 
 ### Why BCD Converter?
 -  BCD is more human-readable than binary or hexadecimal codes because it directly represents decimal digits. This makes it easier for people to interpret and understand the encoded values.
 -  BCD is easier to process in certain applications, such as arithmetic operations, because it preserves the decimal structure of the data.
 
-### Positioning of the binary to BCD Converter
-- In the above block diagram, the binary to BCD converter is placed before the MUX. 
-  - Here 2 coverters are required, one for the LSB and another for the MSB.
-- If we place that converter after the MUX, then it will be a more efficient circuit.
-- Reason: This placement will consume less space and ultimately, same output is obtained.
+### Use of Multiplexer
+- Here, a 2:1 MUX is used where the select line is the output of the control logic and the inputs to the MUX are the 4-bit MSB and the 4-bit LSB bits obtained from the BCD outputs respectivey.
+
 
 ### 7-Segment Display
 - In this project, we have used two 7-Segment displays. 
@@ -111,7 +108,7 @@ The shift register used here is a SIPO(Serial Input Parallel Output) Register. A
 - Due to the high clock frequency and rapid data change rate, the changes in the data are imperceptible to the human eye, resulting in the simultaneous and accurate display of the data on both screens.
 
 ### Code
-```bash
+```verilog
 // Code your design here
 `timescale 1ns / 1ps
 //DEFINES
