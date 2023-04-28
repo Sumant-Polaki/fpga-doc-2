@@ -29,11 +29,6 @@ The LM70 component is widely used across the automotive, industrial, and medical
 [Reference Datasheet of LM70 by Texas Instruments](https://www.dropbox.com/s/ot6h1511lpuxlmx/datasheet-LM70-TI-tempSensor.pdf)
 
 
-## FPGA
-
-**FPGA (Field Programmable Gate Array)** is a type of semiconductor device that can be programmed after manufacturing to perform a wide range of digital logic functions. FPGAs consist of a matrix of configurable logic blocks (CLBs) that can be programmed to perform specific logic functions. FPGAs are highly parallel and can perform multiple tasks simultaneously, which can lead to significant performance gains over traditional processors. FPGAs are used in a wide range of applications, including digital signal processing, image processing, audio and video processing, network processing, and high-performance computing. However, they also require specialized knowledge and can be more expensive than traditional processors.
-
-
 ## SPI Protocol
 The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial communication interface used to exchange data between microcontrollers, sensors, and other devices. The SPI protocol uses a master-slave architecture, where one device (the master) initiates and controls the communication, while the other devices (the slaves) respond to the master's commands.
 
@@ -52,7 +47,7 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 - The SPI protocol is commonly used in embedded systems, where it provides a simple and efficient way to communicate between different devices.
     
 ## Block Diagram    
-![image](https://user-images.githubusercontent.com/84337196/233548771-c6374dd4-a8f3-4eb8-9ce6-2f0b5a5ecdaf.png)
+![image](https://user-images.githubusercontent.com/84337196/235107685-f035ae0c-d5ef-4fec-8f0f-968d06d07747.png)
 
 
 ## Timing Diagram
@@ -100,12 +95,24 @@ A SIPO Register is used here, which stores data serially on each positive clock 
 ### Use of Multiplexer
 - Here, a 2:1 MUX is used where the select line is the output of the control logic and the inputs to the MUX are the 4-bit MSB and the 4-bit LSB bits obtained from the BCD outputs respectivey.
 
+### BCD to 7-segment
+- This conversion logic is obtained by solving the Karnaugh Map of the individual segments of the 7-segment display.
 
 ### 7-Segment Display
 - In this project, we have used two 7-Segment displays. 
 - Each of the displays is activated by a select line.
 - Here logic is developed such that, if one of the select lines get a 1, the other gets a 0 and vice-versa.
 - Due to the high clock frequency and rapid data change rate, the changes in the data are imperceptible to the human eye, resulting in the simultaneous and accurate display of the data on both screens.
+
+## Implementation 
+- This circuit can be implemented in 2 ways:
+  - ASIC(Application Specific Integrated Circuit)
+  - FPGA(Field Programmable Gate Array)
+
+
+### FPGA
+
+**FPGA (Field Programmable Gate Array)** is a type of semiconductor device that can be programmed after manufacturing to perform a wide range of digital logic functions. FPGAs consist of a matrix of configurable logic blocks (CLBs) that can be programmed to perform specific logic functions. FPGAs are highly parallel and can perform multiple tasks simultaneously, which can lead to significant performance gains over traditional processors. FPGAs are used in a wide range of applications, including digital signal processing, image processing, audio and video processing, network processing, and high-performance computing. However, they also require specialized knowledge and can be more expensive than traditional processors.
 
 ### Code
 ```verilog
