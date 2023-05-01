@@ -109,10 +109,32 @@ A SIPO Register is used here, which stores data serially on each positive clock 
   - ASIC(Application Specific Integrated Circuit)
   - FPGA(Field Programmable Gate Array)
 
+### ASIC
+
+**ASIC (Application-Specific Integrated Circuit)** is a type of integrated circuit that is designed for a specific application or task. Unlike FPGAs, ASICs are not programmable and are custom-designed to perform a specific function, which makes them more efficient and faster than general-purpose processors. ASICs can be optimized for power consumption, speed, and size, and are commonly used in applications such as automotive, telecommunications, consumer electronics, and aerospace. However, ASICs require significant upfront design and fabrication costs, which can make them more expensive to develop than FPGAs or other off-the-shelf solutions.
 
 ### FPGA
 
 **FPGA (Field Programmable Gate Array)** is a type of semiconductor device that can be programmed after manufacturing to perform a wide range of digital logic functions. FPGAs consist of a matrix of configurable logic blocks (CLBs) that can be programmed to perform specific logic functions. FPGAs are highly parallel and can perform multiple tasks simultaneously, which can lead to significant performance gains over traditional processors. FPGAs are used in a wide range of applications, including digital signal processing, image processing, audio and video processing, network processing, and high-performance computing. However, they also require specialized knowledge and can be more expensive than traditional processors.
+- SPARTAN 6 FPGA board is used in this project
+
+### What is SPARTAN 6?
+
+SPARTAN 6 is a **chip** that you can program to make different electronic devices. It is an **FPGA** (field-programmable gate array).
+
+Some benefits of SPARTAN 6 are :
+
+- It is cheap and low-power because it uses very small parts (**45nm technology**)
+- It can do many tasks (**147K logic cells**) and store a lot of data (**4.8Mb memory**)
+- It can handle many kinds of signals (**40 I/O standards**) and connect with other devices easily (**PCI Express®**)
+- It can use a special program (**MicroBlaze™ soft processor**) instead of another chip
+- It can protect your work from being copied or changed by others (**AES encryption** and **Device DNA**)
+- It can work in very hot or cold places (extended temperature range)
+
+SPARTAN 6 is good for making devices that need to connect with other things, like cars, TVs, cameras, and machines.
+
+
+
 
 ### Code
 ```verilog
