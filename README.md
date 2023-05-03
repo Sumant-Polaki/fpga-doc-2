@@ -154,15 +154,15 @@ SPARTAN 6 is good for making devices that need to connect with other things, lik
 
 /////Verilog code for continous SPI read of LM07
 module LM07_read(SYSCLK, RSTN, divclk, CS, SCK, SIO, disp, dataSeg, outreg);
-  input SYSCLK;	//System clock from the testbench
-  input RSTN;	//Active-low reset signal
-  input SIO;	                        //Serial data output from the temp sensor.
-  output reg divclk;            //Frequency Divider Clock
-  output CS;	                       //Generate the Chip select for temp sensor
-  output reg SCK;	//Generate the SPI clock for temp sensor
-  output [1:0] disp;	//7-segment display select lines.
-  output [7:0] dataSeg;      //7-segment data
-  output [7:0] outreg;	//the 8-bit data is latched for display
+  input SYSCLK;	                    //System clock from the testbench
+  input RSTN;	                    //Active-low reset signal
+  input SIO;	                    //Serial data output from the temp sensor.
+  output reg divclk;                //Frequency Divider Clock
+  output CS;	                    //Generate the Chip select for temp sensor
+  output reg SCK;	            //Generate the SPI clock for temp sensor
+  output [1:0] disp;	            //7-segment display select lines.
+  output [7:0] dataSeg;             //7-segment data
+  output [7:0] outreg;	            //the 8-bit data is latched for display
   reg SYSCLK_HALF;
   reg [7:0] shift_reg;
   reg [1:0] spi_state;
