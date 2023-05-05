@@ -114,7 +114,7 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
       begin	    
         spi_state <= `SPI_IDLE;
       end
- ```
+ 
 ### Why is synchronous used in place of asynchronous counter?
 - **Synchronous operation**: In synchronous counters, all flip-flops change state at the same time in response to a single clock pulse. This ensures that the outputs of the counter are synchronized and stable, eliminating the possibility of glitches or other timing errors that can occur in asynchronous counters.
 - **Higher operating frequency**: Synchronous counters can operate at higher clock frequencies which makes them suitable for use in applications that require high-speed counting.
