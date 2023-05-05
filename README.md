@@ -74,8 +74,47 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 ## Circuitry of the FPGA used for the project
 
 ### Blocks in the control logic
-
-
+- Counter 
+  - Code Snippet
+  ``` verilog
+    //5b Counter
+  always @(posedge divclk or negedge RSTN)
+    if (~RSTN)
+       count <= `RST_COUNT;
+    else if (count == `MAX_COUNT)
+       count <= `RST_COUNT;
+    else
+       count <= count + 1'b1;
+    ```
+- State Machine
+  - Code Snippet
+  ```verilog
+   // 2-spi_state (IDE, READ) spi_state-machine
+   always @(posedge divclk or negedge RSTN)
+   if (~RSTN)
+      begin	    
+        spi_state <= `SPI_IDLE;
+        bcd_latch <= 4'b0000;
+      end
+   else if ((count >= `CS_LOW_COUNT) && (count < `CS_HIGH_COUNT) )
+      begin
+        spi_state <= `SPI_READ;
+      end
+   else if (count == `CS_HIGH_COUNT)
+      begin	    
+        spi_state <= `DISP_WRITE_MSB;
+        bcd_latch <= bcd_msb;
+      end
+   else if (count == `WRITE_LSB_COUNT)
+      begin	    
+        spi_state <= `DISP_WRITE_LSB;
+        bcd_latch <= bcd_lsb;
+      end
+   else 
+      begin	    
+        spi_state <= `SPI_IDLE;
+      end
+ ```
 ### Why is synchronous used in place of asynchronous counter?
 - **Synchronous operation**: In synchronous counters, all flip-flops change state at the same time in response to a single clock pulse. This ensures that the outputs of the counter are synchronized and stable, eliminating the possibility of glitches or other timing errors that can occur in asynchronous counters.
 - **Higher operating frequency**: Synchronous counters can operate at higher clock frequencies which makes them suitable for use in applications that require high-speed counting.
@@ -124,17 +163,14 @@ SPARTAN 6 is a **chip** that you can program to make different electronic device
 
 Some benefits of SPARTAN 6 are :
 
-- It is cheap and low-power because it uses very small parts (**45nm technology**)
-- It can do many tasks (**147K logic cells**) and store a lot of data (**4.8Mb memory**)
-- It can handle many kinds of signals (**40 I/O standards**) and connect with other devices easily (**PCI Express®**)
-- It can use a special program (**MicroBlaze™ soft processor**) instead of another chip
-- It can protect your work from being copied or changed by others (**AES encryption** and **Device DNA**)
-- It can work in very hot or cold places (extended temperature range)
+- It is cheap and low-power because it uses very small parts (**45nm technology**).
+- It can do many tasks (**147K logic cells**) and store a lot of data (**4.8Mb memory**).
+- It can handle many kinds of signals (**40 I/O standards**) and connect with other devices easily (**PCI Express®**).
+- It can use a special program (**MicroBlaze™ soft processor**) instead of another chip.
+- It can protect your work from being copied or changed by others (**AES encryption** and **Device DNA**).
+- It can work in very hot or cold places (extended temperature range).
 
 SPARTAN 6 is good for making devices that need to connect with other things, like cars, TVs, cameras, and machines.
-
-
-
 
 ### Code
 ```verilog
@@ -192,15 +228,6 @@ module LM07_read(SYSCLK, RSTN, divclk, CS, SCK, SIO, disp, dataSeg, outreg);
   assign outreg[3:0] = bcd_latch; 
 
   //BCD-to-7segment decoder
-  //always @(negedge divclk or negedge RSTN)
-  //  if (~RSTN)
-  //    bcd_latch <= 4'b0000;
-  //  else if (spi_state == `DISP_WRITE_MSB)
-  //    bcd_latch <= bcd_msb;
-  //  else if (spi_state == `DISP_WRITE_LSB)
-   //   bcd_latch <= bcd_lsb;
-  
-//7-segment decoder
   assign dataSeg[7] = (~bcd_latch[2] && ~bcd_latch[0]) || bcd_latch[1] || bcd_latch[0] || (bcd_latch[2] && bcd_latch[0]); //a
   assign dataSeg[6] = ~bcd_latch[2] || (~bcd_latch[1] && ~bcd_latch[0]) || (bcd_latch[1] && bcd_latch[0]);  //b
   assign dataSeg[5] = ~bcd_latch[1] || bcd_latch[0] || bcd_latch[2]; //c
@@ -288,7 +315,38 @@ always @(posedge divclk or negedge RSTN)
  endmodule
  ```
  
-
-
+### Frequency Divider Clock
+- A frequency divider clock is used here as so as to reduce the power consumption and switching. The clock frequency provided by the SPARTAN 6 FPGA is 10 Mhz and the divider clock frequency is 10 Khz.
+  - Code Snippet
+  ```verilog
+  integer cnt;
+  always @ (posedge SYSCLK) begin
+     if(!RSTN) begin
+      divclk = 0;
+      cnt =0;
+      end	
+     else
+      cnt = cnt+1;
+      if (cnt==1000) begin
+        divclk = ~divclk;
+        cnt = 0;
+       end
+      end
+  ```
+### BCD Logic
+- The left shift operations denotes the multiplication by 2 operation while the right shift operation denotes the division by 2 operation. 
+  - Code Snippet
+  ```verilog
+   assign temp_bin = shift_reg<<1;
+  //BCD Logic
+  //Temp/10 approx. 1/16 + 1/32
+  assign bcd_msb = (temp_bin + (temp_bin>>1))>>4;
+  //LSB = temp - 10*MSB = temp - (8*MSB + 2*MSB)
+  assign bcd_lsb = temp_bin - ((bcd_msb<<3) + (bcd_msb<<1));  
+  ```	
+  
+ 
+ 
+ 
 
 
