@@ -337,8 +337,33 @@ always @(posedge divclk or negedge RSTN)
   assign bcd_msb = (temp_bin + (temp_bin>>1))>>4;
   //LSB = temp - 10*MSB = temp - (8*MSB + 2*MSB)
   assign bcd_lsb = temp_bin - ((bcd_msb<<3) + (bcd_msb<<1));  
-  ```	
-  
+  ```	  
+## User Constraint File(UCF)
+A UCF file, or User Constraint File, is a text-based file used in electronic design tools for creating digital circuits. It contains settings and constraints that define how components within a circuit should behave and interact. These files are commonly used with programmable logic devices like FPGAs or CPLDs. UCF files specify details such as pin assignments, clock frequencies, input/output delays, and other design constraints. They allow designers to customize circuit behavior and ensure proper functionality and timing in the implementation process.
+
+The UCF file used here is:
+```bash
+NET "SYSCLK" LOC = "P87";         //Input clock (Location P87 is fixed)
+NET "CS" LOC = "P69";                //Chip Select clock at pin16 of GPIO1
+NET "RSTN" LOC = "P22";          //Manual RSTN from input port 22
+NET "SCK" LOC = "P60";            //Slave Clock generation from pin 16 of GPIO1
+NET "disp[1]" LOC = "P102";    //Display of 1st  7-segment display
+NET "disp[0]" LOC = "P101";    //Display of 2nd 7-segment display
+NET "SIO" LOC = "P126";         //Output of the temperature generation from pin 14 of GPIO1
+
+
+//Pins of 7-segment display (a,b,c,d,e,f,g)
+NET "dataSeg[7]"  LOC = "P119";
+NET "dataSeg[6]"  LOC = "P118";
+NET "dataSeg[5]"  LOC = "P117";
+NET "dataSeg[4]"  LOC = "P116";
+NET "dataSeg[3]"  LOC = "P115";
+NET "dataSeg[2]"  LOC = "P114";
+NET "dataSeg[1]"  LOC = "P112";
+NET "dataSeg[0]"  LOC = "P111";		
+```
+
+
  
  
  
