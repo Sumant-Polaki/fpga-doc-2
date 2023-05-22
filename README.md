@@ -47,7 +47,8 @@ The **Serial Peripheral Interface (SPI)** protocol is a synchronous serial commu
 - The SPI protocol is commonly used in embedded systems, where it provides a simple and efficient way to communicate between different devices.
     
 ## Block Diagram    
-![image](https://user-images.githubusercontent.com/84337196/235107685-f035ae0c-d5ef-4fec-8f0f-968d06d07747.png)
+![image](https://github.com/Sumant-Polaki/fpga-doc-2/assets/84337196/d26f3399-2348-41a6-8e3e-3f1f98698198)
+
 
 
 ## Timing Diagram
