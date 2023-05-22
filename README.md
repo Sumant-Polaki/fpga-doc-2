@@ -345,12 +345,12 @@ A UCF file, or User Constraint File, is a text-based file used in electronic des
 The UCF file used here is:
 ```bash
 NET "SYSCLK" LOC = "P87";         //Input clock (Location P87 is fixed)
-NET "CS" LOC = "P69";                //Chip Select clock at pin16 of GPIO1
-NET "RSTN" LOC = "P22";          //Manual RSTN from input port 22
+NET "CS" LOC = "P69";             //Chip Select clock at pin16 of GPIO1
+NET "RSTN" LOC = "P22";           //Manual RSTN from input port 22
 NET "SCK" LOC = "P60";            //Slave Clock generation from pin 16 of GPIO1
-NET "disp[1]" LOC = "P102";    //Display of 1st  7-segment display
-NET "disp[0]" LOC = "P101";    //Display of 2nd 7-segment display
-NET "SIO" LOC = "P126";         //Output of the temperature generation from pin 14 of GPIO1
+NET "disp[1]" LOC = "P102";       //Display of 1st  7-segment display
+NET "disp[0]" LOC = "P101";       //Display of 2nd 7-segment display
+NET "SIO" LOC = "P126";           //Output of the temperature generation from pin 14 of GPIO1
 
 
 //Pins of 7-segment display (a,b,c,d,e,f,g)
