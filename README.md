@@ -340,7 +340,7 @@ always @(posedge divclk or negedge RSTN)
   assign bcd_lsb = temp_bin - ((bcd_msb<<3) + (bcd_msb<<1));  
   ```	  
 ## User Constraint File(UCF)
-A UCF file, or User Constraint File, is a text-based file used in electronic design tools for creating digital circuits. It contains settings and constraints that define how components within a circuit should behave and interact. These files are commonly used with programmable logic devices like FPGAs or CPLDs. UCF files specify details such as pin assignments, clock frequencies, input/output delays, and other design constraints. They allow designers to customize circuit behavior and ensure proper functionality and timing in the implementation process.
+A UCF file, or User Constraint File, is a text-based file used in electronic design tools for creating digital circuits. It contains settings and constraints that define how components within a circuit should behave and interact. These files are commonly used with programmable logic devices like FPGAs or CPLDs. UCF files specify details such as pin assignments, clock frequencies, input/output delays, and other design constraints. They allow designers to customize circuit behaviour and ensure proper functionality and timing in the implementation process.
 
 The UCF file used here is:
 ```bash
